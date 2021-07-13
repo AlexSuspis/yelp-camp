@@ -32,7 +32,7 @@ seedDB = async () => {
 			images,
 			price,
 			description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore hic et quo quas amet distinctio atque nisi rem dolorem doloribus sit autem, non vero recusandae similique aspernatur ipsum nobis veritatis.',
-			author: '60da23e223bacf1515e327b6'
+			author: '60ec9e5e4fcdf255d6e48680'
 		});
 		await camp.save();
 	}
