@@ -45,7 +45,7 @@ module.exports.create = async (req, res) => {
     const geoData = response.body.features[0].geometry;
 
     const camp = new Campground(req.body.campground);
-    console.log(geoData);
+    // console.log(geoData);
 
     camp.geometry = geoData;
     camp.images = req.files.map(f => ({url: f.path, filename:f.filename}));
