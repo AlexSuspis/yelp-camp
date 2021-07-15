@@ -8,6 +8,7 @@ const geocodingClient = mapboxGeocoding({ accessToken: mapboxToken });
 
 module.exports.index = async (req, res) => {
     const campgrounds = await Campground.find({});
+
     res.render('campgrounds/index', { campgrounds });
 }
 module.exports.renderNewForm = (req, res) => {
