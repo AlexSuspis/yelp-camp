@@ -8,7 +8,7 @@ const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const flash = require('express-flash');
 
-if(process.env.NODE_ENV !== 'production'){
+if (process.env.NODE_ENV !== 'production') {
     require("dotenv").config();
 }
 
@@ -21,7 +21,7 @@ const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 const userRoutes = require('./routes/users');
 
-mongoose.connect('mongodb://localhost:27017/campgrounds', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false })
+mongoose.connect('mongodb://localhost:27017/campgrounds', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
     .then(() => console.log('Connected to database!'))
     .catch(err => console.log(err));
 
@@ -56,7 +56,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use(flash());
-app.use((req,res,next) =>{
+app.use((req, res, next) => {
     //gives access to success variable from inside template files
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
@@ -77,10 +77,10 @@ app.all('*', (req, res, next) => {
     next(new ExpressError('Page not found', 404));
 })
 
-app.use((err, req, res, next) =>{
-    const {statusCode = 500} = err;
-    if(!err.message) err.message = "Something went wrong!";
-    res.status(statusCode).render('error',{err});
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if (!err.message) err.message = "Something went wrong!";
+    res.status(statusCode).render('error', { err });
 });
 
 app.listen(3000, () => {
