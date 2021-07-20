@@ -34,7 +34,13 @@ seedDB = async () => {
 			description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore hic et quo quas amet distinctio atque nisi rem dolorem doloribus sit autem, non vero recusandae similique aspernatur ipsum nobis veritatis.',
 			//Your user ID!!!
 			author: '60ec9e5e4fcdf255d6e48680',
-			geometry: { "type": "Point", "coordinates": [-8.8084, 39.277] }
+			geometry: {
+				"type": "Point",
+				"coordinates": [
+					cities[random1to1000].longitude,
+					cities[random1to1000].latitude
+				]
+			}
 		});
 		await camp.save();
 	}
