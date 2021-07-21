@@ -1,7 +1,7 @@
 mapboxgl.accessToken = mapboxToken;
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/dark-v10',
+    style: 'mapbox://styles/mapbox/light-v10',
     center: [-103.59179687498357, 40.66995747013945],
     zoom: 3
 });
@@ -14,7 +14,7 @@ map.on('load', function () {
         type: 'geojson',
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
         // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        data: campgroundsJSON,
+        data: campgrounds,
         cluster: true,
         clusterMaxZoom: 14, // Max zoom to cluster points on
         clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
@@ -103,14 +103,6 @@ map.on('load', function () {
 
     map.on('click', 'unclustered-point', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
-        var mag = e.features[0].properties.mag;
-        var tsunami;
-
-        if (e.features[0].properties.tsunami === 1) {
-            tsunami = 'yes';
-        } else {
-            tsunami = 'no';
-        }
 
         // Ensure that if the map is zoomed out such that
         // multiple copies of the feature are visible, the
@@ -122,7 +114,7 @@ map.on('load', function () {
         new mapboxgl.Popup()
             .setLngLat(coordinates)
             .setHTML(
-                'magnitude: ' + mag + '<br>Was there a tsunami?: ' + tsunami
+                'hello world'
             )
             .addTo(map);
     });
