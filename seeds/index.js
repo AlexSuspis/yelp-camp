@@ -13,7 +13,7 @@ const randomIndexFromArray = arr => Math.floor(Math.random() * arr.length);
 seedDB = async () => {
 	await Campground.deleteMany({});
 
-	for (let i = 0; i < 50; i++) {
+	for (let i = 0; i < 10; i++) {
 
 		let random1to1000 = Math.floor(Math.random() * 1000);
 		let images = [
