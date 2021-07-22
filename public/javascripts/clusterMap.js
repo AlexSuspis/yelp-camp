@@ -6,6 +6,8 @@ var map = new mapboxgl.Map({
     zoom: 3
 });
 
+console.log(campgrounds)
+
 map.on('load', function () {
     // Add a new source from our GeoJSON data and
     // set the 'cluster' option to true. GL-JS will
@@ -103,6 +105,8 @@ map.on('load', function () {
 
     map.on('click', 'unclustered-point', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
+        var { popupMarkup } = e.features[0].properties;
+
 
         // Ensure that if the map is zoomed out such that
         // multiple copies of the feature are visible, the
@@ -113,9 +117,7 @@ map.on('load', function () {
 
         new mapboxgl.Popup()
             .setLngLat(coordinates)
-            .setHTML(
-                'hello world'
-            )
+            .setHTML(popupMarkup)
             .addTo(map);
     });
 
