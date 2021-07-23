@@ -1,12 +1,13 @@
 mapboxgl.accessToken = mapboxToken;
 const map = new mapboxgl.Map({
-    container: 'map',
+    container: 'cluster-map',
     style: 'mapbox://styles/mapbox/light-v10',
     center: [-103.59179687498357, 40.66995747013945],
     zoom: 3
 });
 
-console.log(campgrounds)
+const nav = new mapboxgl.NavigationControl();
+map.addControl(nav, 'top-right');
 
 map.on('load', function () {
     // Add a new source from our GeoJSON data and
@@ -106,7 +107,6 @@ map.on('load', function () {
     map.on('click', 'unclustered-point', function (e) {
         const coordinates = e.features[0].geometry.coordinates.slice();
         const { popupMarkup } = e.features[0].properties;
-
 
         // Ensure that if the map is zoomed out such that
         // multiple copies of the feature are visible, the
