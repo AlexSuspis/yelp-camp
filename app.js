@@ -14,15 +14,9 @@ const MongoDBStore = require('connect-mongo');
 if (process.env.NODE_ENV !== 'production') {
     require("dotenv").config();
 }
-console.log(process.env);
 
 const atlasDBUrl = process.env.DB_URL;
 const dbUrl = atlasDBUrl || 'mongodb://localhost:27017/campgrounds';
-
-//prints undefined? Hmm...
-console.log(atlasDBUrl);
-
-console.log(dbUrl);
 
 mongoose.connect(dbUrl,
     {
