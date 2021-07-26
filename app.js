@@ -8,6 +8,9 @@ const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const flash = require('express-flash');
 const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+
+
 
 if (process.env.NODE_ENV !== 'production') {
     require("dotenv").config();
@@ -38,6 +41,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
+app.use(helmet({ contentSecurityPolicy: false }));
 
 const sessionConfig = {
     resave: true,
