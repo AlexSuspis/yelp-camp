@@ -9,16 +9,20 @@ const session = require('express-session');
 const flash = require('express-flash');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
+const MongoDBStore = require('connect-mongo');
 
 
 //LOCAL DB URL
 const localDB = 'mongodb://localhost:27017/campgrounds';
 //ATLAS DB
 const atlasDBUrl = process.env.DB_URL;
+
 //prints undefined? Hmm...
 // console.log(atlasDBUrl)
 
-mongoose.connect(localDB,
+const dbUrl = localDB;
+
+mongoose.connect(dbUrl,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -54,14 +58,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
 app.use(helmet({ contentSecurityPolicy: false }));
 
+const store = MongoDBStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60 //save info in db every 24 hours
+});
+
+store.on('error', function (e) {
+    console.log('Session Store Error!\n', e);
+})
+
 const sessionConfig = {
+    store,
     resave: true,
     saveUninitialized: true,
     secret: 'secret',
     cookie: {
         httpOnly: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-    }
+    },
 }
 
 app.use(session(sessionConfig));
