@@ -13,14 +13,13 @@ const MongoDBStore = require('connect-mongo');
 
 
 //LOCAL DB URL
-const localDB = 'mongodb://localhost:27017/campgrounds';
-//ATLAS DB
+
 const atlasDBUrl = process.env.DB_URL;
+const dbUrl = atlasDBUrl || 'mongodb://localhost:27017/campgrounds';
 
 //prints undefined? Hmm...
-// console.log(atlasDBUrl)
-
-const dbUrl = localDB;
+console.log(atlasDBUrl);
+console.log(dbUrl);
 
 mongoose.connect(dbUrl,
     {
@@ -67,11 +66,13 @@ store.on('error', function (e) {
     console.log('Session Store Error!\n', e);
 })
 
+const secret = process.env.SECRET || 'secret';
+
 const sessionConfig = {
     store,
     resave: true,
     saveUninitialized: true,
-    secret: 'secret',
+    secret,
     cookie: {
         httpOnly: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
