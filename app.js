@@ -7,6 +7,7 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const flash = require('express-flash');
+const mongoSanitize = require('express-mongo-sanitize');
 
 if (process.env.NODE_ENV !== 'production') {
     require("dotenv").config();
@@ -28,6 +29,7 @@ mongoose.connect('mongodb://localhost:27017/campgrounds', { useNewUrlParser: tru
 const app = express();
 
 
+
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -35,6 +37,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(mongoSanitize());
 
 const sessionConfig = {
     resave: true,

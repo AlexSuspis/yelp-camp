@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "express-connect": "^0.0.1",
     "express-flash": "^0.0.2",
+    "express-mongo-sanitize": "^2.1.0",
     "express-session": "^1.17.2",
     "joi": "^17.4.0",
     "method-override": "^3.0.0",
