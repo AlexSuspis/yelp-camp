@@ -7,7 +7,13 @@ const { places, descriptors } = require('./seedHelpers')
 //so we can access the .env file
 require("dotenv").config();
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/campgrounds';
+//atlas
+// const dbUrl = process.env.DB_URL
+
+//development
+const dbUrl = 'mongodb://localhost:27017/campgrounds';
+
+console.log(dbUrl);
 
 
 
@@ -21,7 +27,7 @@ const randomIndexFromArray = arr => Math.floor(Math.random() * arr.length);
 seedDB = async () => {
 	await Campground.deleteMany({});
 
-	for (let i = 0; i < 150; i++) {
+	for (let i = 0; i < 10; i++) {
 
 		let random1to1000 = Math.floor(Math.random() * 1000);
 		let images = [
