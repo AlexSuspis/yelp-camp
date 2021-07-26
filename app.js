@@ -11,6 +11,22 @@ const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 
 
+//LOCAL DB URL
+const localDB = 'mongodb://localhost:27017/campgrounds';
+//ATLAS DB
+const atlasDBUrl = process.env.DB_URL;
+//prints undefined? Hmm...
+// console.log(atlasDBUrl)
+
+mongoose.connect(localDB,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+    })
+    .then(() => console.log('Connected to database!'))
+    .catch(err => console.log(err));
 
 if (process.env.NODE_ENV !== 'production') {
     require("dotenv").config();
@@ -25,12 +41,7 @@ const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 const userRoutes = require('./routes/users');
 
-mongoose.connect('mongodb://localhost:27017/campgrounds', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-    .then(() => console.log('Connected to database!'))
-    .catch(err => console.log(err));
-
 const app = express();
-
 
 
 app.engine('ejs', ejsMate);
