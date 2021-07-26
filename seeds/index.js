@@ -8,7 +8,6 @@ const { places, descriptors } = require('./seedHelpers')
 require("dotenv").config();
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/campgrounds';
-console.log(dbUrl);
 
 
 
@@ -22,7 +21,7 @@ const randomIndexFromArray = arr => Math.floor(Math.random() * arr.length);
 seedDB = async () => {
 	await Campground.deleteMany({});
 
-	for (let i = 0; i < 300; i++) {
+	for (let i = 0; i < 150; i++) {
 
 		let random1to1000 = Math.floor(Math.random() * 1000);
 		let images = [
@@ -42,7 +41,7 @@ seedDB = async () => {
 			price,
 			description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore hic et quo quas amet distinctio atque nisi rem dolorem doloribus sit autem, non vero recusandae similique aspernatur ipsum nobis veritatis.',
 			//Your user ID!!!
-			author: '60ec9e5e4fcdf255d6e48680',
+			author: '60fed78b26907ef1f8c18952',
 			geometry: {
 				"type": "Point",
 				"coordinates": [
