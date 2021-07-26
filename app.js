@@ -11,14 +11,17 @@ const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const MongoDBStore = require('connect-mongo');
 
-
-//LOCAL DB URL
+if (process.env.NODE_ENV !== 'production') {
+    require("dotenv").config();
+}
+console.log(process.env);
 
 const atlasDBUrl = process.env.DB_URL;
 const dbUrl = atlasDBUrl || 'mongodb://localhost:27017/campgrounds';
 
 //prints undefined? Hmm...
 console.log(atlasDBUrl);
+
 console.log(dbUrl);
 
 mongoose.connect(dbUrl,
@@ -31,9 +34,6 @@ mongoose.connect(dbUrl,
     .then(() => console.log('Connected to database!'))
     .catch(err => console.log(err));
 
-if (process.env.NODE_ENV !== 'production') {
-    require("dotenv").config();
-}
 
 
 const passport = require('passport');
